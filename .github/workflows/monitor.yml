@@ -2,26 +2,29 @@ name: MDCN Dashboard Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # every 5 minutes
-  workflow_dispatch:
+    - cron: "*/15 * * * *" # every 15 minutes
+  workflow_dispatch:       # allows manual run
 
 jobs:
   check-site:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      # Step 1: Checkout repo
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # Step 2: Setup Node.js
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+      # Step 3: Install dependencies
+      - run: npm install
 
-      - name: Run monitor
-        run: node check.js
+      # Step 4: Run the bot
+      - run: node check.js
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: https://housemanship.mdcn.gov.ng/main/dashboard
