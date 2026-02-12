@@ -1,8 +1,8 @@
-name: MDCN Accessibility Bot
+name: MDCN Dashboard Monitor
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes
+    - cron: "*/15 * * * *"  # every 15 minutes
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,15 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run bot
+      - name: Run monitor
         run: node check.js
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit database
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add status.db
-          git commit -m "Update site status log" || echo "No changes"
-          git push
