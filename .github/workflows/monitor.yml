@@ -1,8 +1,8 @@
-name: MDCN Latency Bot
+name: MDCN Accessibility Bot
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/15 * * * *"   # every 15 minutes
   workflow_dispatch:
 
 jobs:
@@ -10,20 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      - run: node check.js
+      - name: Run bot
+        run: node check.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit database
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add status.db
-          git commit -m "Update latency log" || echo "No changes"
+          git commit -m "Update site status log" || echo "No changes"
           git push
