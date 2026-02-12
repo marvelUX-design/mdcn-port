@@ -1,12 +1,12 @@
 {
-  "name": "accessibility-bot",
+  "name": "github-latency-bot",
   "version": "1.0.0",
   "main": "check.js",
   "scripts": {
     "start": "node check.js"
   },
   "dependencies": {
-    "sqlite3": "^5.1.7",
     "node-fetch": "^3.3.2"
-  }
+  },
+  "type": "module"
 }
