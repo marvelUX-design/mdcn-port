@@ -1,20 +1,12 @@
 {
-  "name": "stella",
+  "name": "accessibility-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "check.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node check.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "nodemailer": "^7.0.6",
-    "redis": "^5.8.3",
-    "resend": "^6.1.2"
+    "sqlite3": "^5.1.7",
+    "node-fetch": "^3.3.2"
   }
 }
